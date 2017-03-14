@@ -122,12 +122,34 @@ public class JTreeTable extends JTable {
             
             
             if(te.isExpanded() == true && te.getChildren().isEmpty() == false && te.isLeaf() == false){
+                int index = 1;
                 for(int i=0; i< te.getChildren().size(); i++){
-                    dtm.insertRow(row+i+1, rows.get(te.getChildren().get(i)));
+                    TreeElement child = te.getChildren().get(i);                    
+                    if(child != null && child.getParent() != null && child.getParent().equals(te)){
+                        dtm.insertRow(row+index, rows.get(te.getChildren().get(i)));
+                        index++;
+                    }
                 }                
             }else if(te.isExpanded() == false && te.getChildren().isEmpty() == false && te.isLeaf() == false){
-                for(int i=row + te.getChildren().size(); i>row; i--){
-                    dtm.removeRow(i);
+                //On réunit dans un tableau tous les sous éléments de te.
+                List<Integer> ints = new ArrayList<>();
+                for(int i=0; i<dtm.getRowCount(); i++){
+                    //Repérage du parent
+                    TreeElement search = (TreeElement)getValueAt(i, 0);
+                    if(search.equals(te)){
+                        for(int j=0; j<dtm.getRowCount(); j++){
+                            //On choppe les enfants
+                            TreeElement child = (TreeElement)getValueAt(j, 0);
+                            if(child != null && child.getParent() != null && child.getParent().equals(search)){
+                                ints.add(j);
+                            }
+                        }
+                    }
+                }
+                //On itère sur nos positions
+                for(int i = ints.size()-1; i>=0; i--){
+                    int index = ints.get(i);
+                    dtm.removeRow(index);
                 }
             }
 
@@ -144,7 +166,7 @@ public class JTreeTable extends JTable {
                 objElements[i] = row[i-1];
             }
             
-            parent.addChild(child);
+            parent.addChild(parent, child);
             parent.setLeaf(false);
 
             rows.put(child, objElements);
@@ -169,6 +191,7 @@ public class JTreeTable extends JTable {
         private ImageIcon eXimageIcon;
         private ImageIcon cSimageIcon;
         private static List<TreeElement> children = new ArrayList<>();
+        private TreeElement parent = null;
         
         private boolean expanded = false;
         private boolean leaf = true;
@@ -214,8 +237,9 @@ public class JTreeTable extends JTable {
             return children;
         }
         
-        public void addChild(TreeElement elem){
+        public void addChild(TreeElement parent, TreeElement elem){
             children.add(elem);
+            elem.setParent(parent);
         }
 
         public void setExpanded(boolean expanded) {
@@ -232,6 +256,14 @@ public class JTreeTable extends JTable {
 
         public boolean isLeaf() {
             return leaf;
+        }
+
+        public void setParent(TreeElement parent) {
+            this.parent = parent;
+        }
+
+        public TreeElement getParent() {
+            return parent;
         }
         
         
