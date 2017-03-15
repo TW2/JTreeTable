@@ -15,7 +15,7 @@ Then in your init method, write something like that :
 List<Setup> sets = new ArrayList<>();
 
 //Add Setup to your list
-//Format four your column: name, class, can edit, size and identifier
+//Format for your column: name, class, can edit, size and identifier
 sets.add(new Setup("Fruits", String.class, false, 120, "Fruits"));
 sets.add(new Setup("In cart", Boolean.class, true, 120, "Cart"));
 
@@ -27,7 +27,7 @@ getContentPane().add(treeTable.getSrollPane(), BorderLayout.CENTER);
 
 //Add a TreeElement parent object
 //Format of TreeElement instance: display name, expand image (can be null) and collapse image (can be null)
-//Format of adBranch: parent child (can be null if parent) and all your object of the row
+//Format of addBranch: parent, child (can be null if parent) and all your object of the row
 JTreeTable.TreeElement teCommon = new JTreeTable.TreeElement("Common", null, null);
 treeTable.addBranch(teCommon, null, new Object[]{"A color", false});
 JTreeTable.TreeElement teChild01 = new JTreeTable.TreeElement("Pear", null, null);
