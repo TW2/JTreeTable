@@ -23,7 +23,7 @@ sets.add(new Setup("In cart", Boolean.class, true, 120, "Cart"));
 treeTable = new JTreeTable(sets);
 
 //Add the preconfigured scrollpane object
-getContentPane().add(treeTable.getSrollPane(), BorderLayout.CENTER);
+getContentPane().add(treeTable.getScrollPane(), BorderLayout.CENTER);
 
 //Add a TreeElement parent object
 //Format of TreeElement instance: display name, expand image (can be null) and collapse image (can be null)
