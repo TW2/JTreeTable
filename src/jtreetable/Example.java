@@ -32,7 +32,7 @@ public class Example extends javax.swing.JFrame {
         sets.add(new Setup("In cart", Boolean.class, true, 120, "Cart"));
         treeTable = new JTreeTable(sets);
         
-        getContentPane().add(treeTable.getSrollPane(), BorderLayout.CENTER);
+        getContentPane().add(treeTable.getScrollPane(), BorderLayout.CENTER);
         
         JTreeTable.TreeElement teCommon = new JTreeTable.TreeElement("Common", null, null);
         treeTable.addBranch(teCommon, null, new Object[]{"A color", false});

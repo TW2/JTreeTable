@@ -182,7 +182,7 @@ public class JTreeTable extends JTable {
         }        
     }
     
-    public JScrollPane getSrollPane(){
+    public JScrollPane getScrollPane(){
         return scrollpane;
     }
 
